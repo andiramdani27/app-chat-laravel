@@ -17,7 +17,12 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+Vue.component('chat-box', require('./components/chat/Chat-box.vue'));
+Vue.component('chat-messages', require('./components/chat/Message.vue'));
+Vue.component('chat-form', require('./components/chat/Form.vue'));
+Vue.component('chat-userlist', require('./components/chat/Users.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 
