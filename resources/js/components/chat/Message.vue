@@ -23,11 +23,11 @@
             this.getMessage();
         },
         methods: {
-          getMessage() {
-            axios.get('/messages').then(response => {
-                this.messages = response.data
-            });
-          }
+            getMessage() {
+                axios.get('/messages').then(response => {
+                    this.messages = response.data
+                });
+            }
         }
     }
 </script>
