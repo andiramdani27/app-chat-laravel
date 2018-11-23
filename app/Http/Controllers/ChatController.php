@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -15,6 +18,17 @@ class ChatController extends Controller
     {
         return view('chat.index');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getMessages()
+    {
+        return Message::with('user')->orderBy('id','desc')->take(10)->get();
+    }
+
 
     /**
      * Show the form for creating a new resource.

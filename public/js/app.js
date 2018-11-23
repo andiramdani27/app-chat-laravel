@@ -57281,7 +57281,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\n.messages {\n  margin-top: 5px;\n}\n.time {\n  font-weight: 800;\n}\n.message {\n  font-size: 2rem;\n}\n", ""]);
+exports.push([module.i, "\n.messages {\n  margin-top: 5px;\n}\n.time {\n  font-weight: 800;\n}\n.message {\n  font-size: 1.5rem;\n}\n.chat-lists {\n  max-height: 400px;\n  overflow-y: scroll;\n}\n", ""]);
 
 // exports
 
@@ -57649,18 +57649,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            messages: []
+        };
+    },
     mounted: function mounted() {
-        console.log('Component mounted.');
+        this.getMessage();
+    },
+
+    methods: {
+        getMessage: function getMessage() {
+            var _this = this;
+
+            axios.get('/messages').then(function (response) {
+                _this.messages = response.data;
+            });
+        }
     }
 });
 
@@ -57672,38 +57679,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "chat-lists" }, [
-      _c("div", { staticClass: "messages" }, [
+  return _c(
+    "div",
+    { staticClass: "chat-lists" },
+    _vm._l(_vm.messages, function(message) {
+      return _c("div", { staticClass: "messages" }, [
         _c("div", { staticClass: "user" }, [
-          _vm._v("Andi Ramdani\n\t\t\t"),
-          _c("span", { staticClass: "time" }, [_vm._v("22/11/2019 05:00")])
+          _vm._v(_vm._s(message.user.name) + " -\n\t\t\t"),
+          _c("span", { staticClass: "time" }, [
+            _vm._v(_vm._s(message.created_at))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "message" }, [
-          _vm._v("\n\t\t\tini contoh chat saya\n\t\t")
+          _vm._v("\n\t\t\t" + _vm._s(message.subject) + "\n\t\t")
         ]),
         _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "user" }, [
-          _vm._v("Yani Nurmayani\n\t\t\t"),
-          _c("span", { staticClass: "time" }, [_vm._v("23/11/2019 14:00")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "message" }, [
-          _vm._v("\n\t\t\tini contoh chat yani\n\t\t")
-        ])
+        _c("hr")
       ])
-    ])
-  }
-]
+    })
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

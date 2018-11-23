@@ -1,29 +1,33 @@
 <template>
     <div class="chat-lists">
-    	<div class="messages">
-    		<div class="user">Andi Ramdani
-    			<span class="time">22/11/2019 05:00</span>
+    	<div class="messages" v-for="message in messages">
+    		<div class="user">{{ message.user.name }} -
+    			<span class="time">{{ message.created_at }}</span>
     		</div>
     		<div class="message">
-    			ini contoh chat saya
+    			{{ message.subject }}
     		</div>
-
             <hr>
-
-    		<div class="user">Yani Nurmayani
-    			<span class="time">23/11/2019 14:00</span>
-    		</div>
-    		<div class="message">
-    			ini contoh chat yani
-    		</div>
     	</div>
     </div>
 </template>
 
 <script>
     export default {
+        data() {
+            return {
+                messages:[]
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            this.getMessage();
+        },
+        methods: {
+          getMessage() {
+            axios.get('/messages').then(response => {
+                this.messages = response.data
+            });
+          }
         }
     }
 </script>
@@ -32,12 +36,14 @@
     .messages {
         margin-top: 5px;
     }
-
     .time {
         font-weight: 800;
     }
-
     .message {
-        font-size: 2rem;
-    }    
+        font-size: 1.5rem;
+    }
+    .chat-lists {
+        max-height:400px;
+        overflow-y:scroll;
+    }
 </style>
